@@ -5,12 +5,16 @@ export default function AddItemForm({ onAddItem }) {
   const [value, setValue] = useState("");
   const handleValueChange = (event) => {
     setValue(event.target.value);
-    console.log(value);
   };
   const handleSubmit = (event) => {
     event.preventDefault();
-    onAddItem(value);
-    setValue("");
+    if (value === "") {
+      alert("Item can not be empty");
+      return;
+    } else {
+      onAddItem(value);
+      setValue("");
+    }
   };
 
   return (

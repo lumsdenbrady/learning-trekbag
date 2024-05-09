@@ -26,11 +26,17 @@ export default function Container() {
 
   const addItem = (text) => {
     const currentTime = new Date().getTime();
-    const newItem = { id: { currentTime }, text: text, packed: false };
+    const newItem = { id: currentTime, text: text, packed: false };
     setItems([...items, newItem]);
   };
   const deleteItem = (id) => {
     //delete an item using its id
+    setItems((prev) => {
+      const newItems = prev.filter((item) => {
+        return item.id !== id;
+      });
+      return newItems;
+    });
   };
   const togglePacked = (id) => {
     setItems((prev) => {
@@ -41,21 +47,46 @@ export default function Container() {
           return item;
         }
       });
-      console.log(newItems);
       return newItems;
     });
   };
-  const deleteAllItems = () => {};
-  const resetToInitial = () => {};
-  const markAllAsPacked = () => {};
-  const markAllAsUnpacked = () => {};
+  const deleteAllItems = () => {
+    setItems([]);
+  };
+  const resetToInitial = () => {
+    setItems(initialItems);
+  };
+  const markAllAsPacked = () => {
+    setItems((prev) => {
+      const newItems = prev.map((item) => {
+        return { ...item, packed: true };
+      });
+
+      return newItems;
+    });
+  };
+  const markAllAsUnpacked = () => {
+    setItems((prev) => {
+      const newItems = prev.map((item) => {
+        return { ...item, packed: false };
+      });
+
+      return newItems;
+    });
+  };
 
   return (
     <>
       <main>
         <Header />
-        <ItemList onToggle={togglePacked} items={items} />
-        <Sidebar onAddItem={addItem} />
+        <ItemList onDelete={deleteItem} onToggle={togglePacked} items={items} />
+        <Sidebar
+          onAddItem={addItem}
+          onDeleteAllItems={deleteAllItems}
+          onMarkAllAsPacked={markAllAsPacked}
+          onResetToInitial={resetToInitial}
+          onMarkAllAsUnpacked={markAllAsUnpacked}
+        />
       </main>
       <Footer />
     </>

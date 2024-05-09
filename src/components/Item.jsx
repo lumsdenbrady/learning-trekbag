@@ -1,6 +1,9 @@
-export default function Item({ item, onToggle }) {
+export default function Item({ item, onToggle, onDelete }) {
   const handleToggle = () => {
     onToggle(item.id);
+  };
+  const handleDelete = () => {
+    onDelete(item.id);
   };
   return (
     <li className="item">
@@ -8,7 +11,7 @@ export default function Item({ item, onToggle }) {
         <input onChange={handleToggle} type="checkbox" checked={item.packed} />
         {item.text}
       </label>
-      <button> X </button>
+      <button onClick={handleDelete}> X </button>
     </li>
   );
 }
