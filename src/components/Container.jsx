@@ -29,7 +29,9 @@ export default function Container() {
     const newItem = { id: { currentTime }, text: text, packed: false };
     setItems([...items, newItem]);
   };
-  const deleteItem = (id) => {};
+  const deleteItem = (id) => {
+    //delete an item using its id
+  };
   const markAsPacked = (id) => {};
   const deleteAllItems = () => {};
   const resetToInitial = () => {};
