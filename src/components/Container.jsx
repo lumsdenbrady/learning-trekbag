@@ -32,7 +32,19 @@ export default function Container() {
   const deleteItem = (id) => {
     //delete an item using its id
   };
-  const markAsPacked = (id) => {};
+  const togglePacked = (id) => {
+    setItems((prev) => {
+      const newItems = prev.map((item) => {
+        if (item.id === id) {
+          return { ...item, packed: !item.packed };
+        } else {
+          return item;
+        }
+      });
+      console.log(newItems);
+      return newItems;
+    });
+  };
   const deleteAllItems = () => {};
   const resetToInitial = () => {};
   const markAllAsPacked = () => {};
@@ -42,7 +54,7 @@ export default function Container() {
     <>
       <main>
         <Header />
-        <ItemList items={items} />
+        <ItemList onToggle={togglePacked} items={items} />
         <Sidebar onAddItem={addItem} />
       </main>
       <Footer />
