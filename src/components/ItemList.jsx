@@ -49,7 +49,7 @@ export default function ItemList({ items, onToggle, onDelete }) {
         value={sortBy}
         onChange={setSortBy}
       />
-      {sortedItems().length > 0 ? (
+      {items.length > 0 ? (
         sortedItems().map((item) => {
           return (
             <Item
