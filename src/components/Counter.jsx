@@ -1,3 +1,7 @@
-export default function Counter() {
-  return <div className="counter">1/3 packed</div>;
+export default function Counter({ totalPackedItems, totalNumberOfItems }) {
+  return (
+    <div className="counter">
+      {totalPackedItems}/{totalNumberOfItems} packed
+    </div>
+  );
 }

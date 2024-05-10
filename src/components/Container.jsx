@@ -75,10 +75,15 @@ export default function Container() {
     });
   };
 
+  const totalNumberOfItems = items.length;
+  const totalPackedItems = items.filter((item) => item.packed == true).length;
   return (
     <>
       <main>
-        <Header />
+        <Header
+          totalNumberOfItems={totalNumberOfItems}
+          totalPackedItems={totalPackedItems}
+        />
         <ItemList onDelete={deleteItem} onToggle={togglePacked} items={items} />
         <Sidebar
           onAddItem={addItem}
