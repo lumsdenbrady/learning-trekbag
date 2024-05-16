@@ -26,7 +26,7 @@ export const useStore = ((set) => ({
                 text,
                 packed: false,
             }]
-    })),
+    })), 
     deleteItem: (id) => set((state) =>({
 items: state.items.filter((item)=>item.id !== id)
     }))
