@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import EmptyState from "./EmptyState";
 import Item from "./Item";
 import Select from "react-select";
@@ -11,7 +11,7 @@ export default function ItemList({ items, onToggle, onDelete }) {
   ];
   const [sortBy, setSortBy] = useState("default");
 
-  const sortedItems = () => {
+  const sortedItems = useMemo(() => {
     const itemsToSort = items;
     if (sortBy.value === "default") {
       return itemsToSort;
@@ -26,7 +26,7 @@ export default function ItemList({ items, onToggle, onDelete }) {
     } else {
       return itemsToSort;
     }
-  };
+  }, [items, sortBy]);
   return (
     <ul className="item-list">
       <Select
@@ -50,7 +50,7 @@ export default function ItemList({ items, onToggle, onDelete }) {
         onChange={setSortBy}
       />
       {items.length > 0 ? (
-        sortedItems().map((item) => {
+        sortedItems.map((item) => {
           return (
             <Item
               onDelete={onDelete}
